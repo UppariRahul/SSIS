@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "carCrashDW", "carCrashDW\carCrashDW.dtproj", "{DF3CBA41-1E49-4DA0-9034-8F13BD61ABB3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF3CBA41-1E49-4DA0-9034-8F13BD61ABB3}.Development|Default.ActiveCfg = Development
+		{DF3CBA41-1E49-4DA0-9034-8F13BD61ABB3}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EA65233C-50EA-437A-B0CD-6F4C16D5AF3B}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,2657 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/5/2019 11:53:30 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SUBUNAIRFBED"
+  DTS:CreatorName="SUBUNAIRFBED\subunair"
+  DTS:DTSID="{9CF94D77-339E-435A-B739-6CD687063314}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1900.80"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{3D64A997-7B74-4A1A-9270-0B7A0C0A646E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{C5486A31-2340-49F8-AC43-94FE8F19DFBB}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\Mac\Home\Desktop\CarCrashIncident.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SUBUNAIRFBED.carCrashDW]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{72848AAE-E76F-447B-9FF2-3943FD5D1879}"
+      DTS:ObjectName="SUBUNAIRFBED.carCrashDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SUBUNAIRFBED;Initial Catalog=carCrashDW;Integrated Security=True;Application Name=SSIS-Package1-{72848AAE-E76F-447B-9FF2-3943FD5D1879}SUBUNAIRFBED.carCrashDW;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CarCrashDate_DataFlowTask"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{ABAFA46F-BE3E-4973-B063-AE86E537FEE5}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CarCrashDate_DataFlowTask"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="CarCrashDate_Dim"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."CarCrashDate_Dim"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SUBUNAIRFBED.carCrashDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[SUBUNAIRFBED.carCrashDW]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].Columns[CrashDate]"
+                      cachedDataType="date"
+                      cachedName="CrashDate"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[CrashDate]"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]" />
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].Columns[DayType]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="DayType"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[DayType]"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[DayType]" />
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].Columns[DayOfWeek]"
+                      cachedDataType="wstr"
+                      cachedLength="9"
+                      cachedName="DayOfWeek"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[DayOfWeek_]"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[DayOfWeek]" />
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].Columns[DayOfMonth]"
+                      cachedDataType="i4"
+                      cachedName="DayOfMonth"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[DayOfMonth_]"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[DayOfMonth]" />
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].Columns[CrashMonth]"
+                      cachedDataType="i4"
+                      cachedName="CrashMonth"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[Month_]"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[CrashMonth]" />
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].Columns[CrashQuarter]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="CrashQuarter"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[Quarter_]"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[CrashQuarter]" />
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].Columns[CrashYear]"
+                      cachedDataType="i4"
+                      cachedName="CrashYear"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[Year_]"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[CrashYear]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[CarCrashDateKey]"
+                      dataType="i4"
+                      name="CarCrashDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[CrashDate]"
+                      dataType="dbTimeStamp"
+                      name="CrashDate" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[DayOfWeek_]"
+                      dataType="wstr"
+                      length="15"
+                      name="DayOfWeek_" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[DayType]"
+                      dataType="wstr"
+                      length="20"
+                      name="DayType" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[DayOfMonth_]"
+                      dataType="i4"
+                      name="DayOfMonth_" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[Month_]"
+                      dataType="wstr"
+                      length="10"
+                      name="Month_" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[Quarter_]"
+                      dataType="wstr"
+                      length="2"
+                      name="Quarter_" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input].ExternalColumns[Year_]"
+                      dataType="i4"
+                      name="Year_" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="CarCrashIncident"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">CarCrashIncident$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ReportNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[ReportNumber]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ReportNumber]"
+                      name="ReportNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[LocalCaseNumber]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[LocalCaseNumber]"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[LocalCaseNumber]"
+                      name="LocalCaseNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[AgencyName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[AgencyName]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[AgencyName]"
+                      name="AgencyName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ACRSReportType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[ACRSReportType]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ACRSReportType]"
+                      name="ACRSReportType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrashDate]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrashDate]"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrashDate]"
+                      name="CrashDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrashTime]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrashTime]"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrashTime]"
+                      name="CrashTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[RouteType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[RouteType]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[RouteType]"
+                      name="RouteType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[RoadName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[RoadName]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[RoadName]"
+                      name="RoadName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrossStreetType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrossStreetType]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrossStreetType]"
+                      name="CrossStreetType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrossStreetName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrossStreetName]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrossStreetName]"
+                      name="CrossStreetName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CollisionType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CollisionType]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CollisionType]"
+                      name="CollisionType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Weather]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[Weather]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Weather]"
+                      name="Weather"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SurfaceCondition]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[SurfaceCondition]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SurfaceCondition]"
+                      name="SurfaceCondition"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Light]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[Light]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Light]"
+                      name="Light"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[TrafficControl]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[TrafficControl]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[TrafficControl]"
+                      name="TrafficControl"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[PersonID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[PersonID]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[PersonID]"
+                      name="PersonID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverSubstanceAbuse]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverSubstanceAbuse]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverSubstanceAbuse]"
+                      name="DriverSubstanceAbuse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[NonMotoristSubstanceAbuse]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[NonMotoristSubstanceAbuse]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[NonMotoristSubstanceAbuse]"
+                      name="NonMotoristSubstanceAbuse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverAtFault]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverAtFault]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverAtFault]"
+                      name="DriverAtFault"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[InjurySeverity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[InjurySeverity]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[InjurySeverity]"
+                      name="InjurySeverity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Circumstance]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[Circumstance]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Circumstance]"
+                      name="Circumstance"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverDistractedBy]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverDistractedBy]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverDistractedBy]"
+                      name="DriverDistractedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriversLicenseState]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriversLicenseState]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriversLicenseState]"
+                      name="DriversLicenseState"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleID]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleID]"
+                      name="VehicleID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleDamageExtent]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleDamageExtent]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleDamageExtent]"
+                      name="VehicleDamageExtent"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleFirstImpactLocation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleFirstImpactLocation]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleFirstImpactLocation]"
+                      name="VehicleFirstImpactLocation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleSecondImpactLocation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleSecondImpactLocation]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleSecondImpactLocation]"
+                      name="VehicleSecondImpactLocation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleBodyType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleBodyType]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleBodyType]"
+                      name="VehicleBodyType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMovement]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleMovement]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMovement]"
+                      name="VehicleMovement"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleContinuingDir]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleContinuingDir]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleContinuingDir]"
+                      name="VehicleContinuingDir"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleGoingDir]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleGoingDir]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleGoingDir]"
+                      name="VehicleGoingDir"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SpeedLimit]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[SpeedLimit]"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SpeedLimit]"
+                      name="SpeedLimit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverlessVehicle]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverlessVehicle]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverlessVehicle]"
+                      name="DriverlessVehicle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ParkedVehicle]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[ParkedVehicle]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ParkedVehicle]"
+                      name="ParkedVehicle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleYear]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleYear]"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleYear]"
+                      name="VehicleYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMake]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleMake]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMake]"
+                      name="VehicleMake"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleModel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleModel]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleModel]"
+                      name="VehicleModel"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[EquipmentProblems]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[EquipmentProblems]"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[EquipmentProblems]"
+                      name="EquipmentProblems"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[ReportNumber]"
+                      dataType="wstr"
+                      length="255"
+                      name="ReportNumber" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[LocalCaseNumber]"
+                      dataType="r8"
+                      name="LocalCaseNumber" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[AgencyName]"
+                      dataType="wstr"
+                      length="255"
+                      name="AgencyName" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[ACRSReportType]"
+                      dataType="wstr"
+                      length="255"
+                      name="ACRSReportType" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrashDate]"
+                      dataType="date"
+                      name="CrashDate" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrashTime]"
+                      dataType="date"
+                      name="CrashTime" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[RouteType]"
+                      dataType="wstr"
+                      length="255"
+                      name="RouteType" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[RoadName]"
+                      dataType="wstr"
+                      length="255"
+                      name="RoadName" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrossStreetType]"
+                      dataType="wstr"
+                      length="255"
+                      name="CrossStreetType" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrossStreetName]"
+                      dataType="wstr"
+                      length="255"
+                      name="CrossStreetName" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CollisionType]"
+                      dataType="wstr"
+                      length="255"
+                      name="CollisionType" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[Weather]"
+                      dataType="wstr"
+                      length="255"
+                      name="Weather" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[SurfaceCondition]"
+                      dataType="wstr"
+                      length="255"
+                      name="SurfaceCondition" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[Light]"
+                      dataType="wstr"
+                      length="255"
+                      name="Light" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[TrafficControl]"
+                      dataType="wstr"
+                      length="255"
+                      name="TrafficControl" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[PersonID]"
+                      dataType="wstr"
+                      length="255"
+                      name="PersonID" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverSubstanceAbuse]"
+                      dataType="wstr"
+                      length="255"
+                      name="DriverSubstanceAbuse" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[NonMotoristSubstanceAbuse]"
+                      dataType="wstr"
+                      length="255"
+                      name="NonMotoristSubstanceAbuse" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverAtFault]"
+                      dataType="wstr"
+                      length="255"
+                      name="DriverAtFault" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[InjurySeverity]"
+                      dataType="wstr"
+                      length="255"
+                      name="InjurySeverity" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[Circumstance]"
+                      dataType="wstr"
+                      length="255"
+                      name="Circumstance" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverDistractedBy]"
+                      dataType="wstr"
+                      length="255"
+                      name="DriverDistractedBy" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriversLicenseState]"
+                      dataType="wstr"
+                      length="255"
+                      name="DriversLicenseState" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleID]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleID" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleDamageExtent]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleDamageExtent" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleFirstImpactLocation]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleFirstImpactLocation" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleSecondImpactLocation]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleSecondImpactLocation" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleBodyType]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleBodyType" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleMovement]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleMovement" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleContinuingDir]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleContinuingDir" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleGoingDir]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleGoingDir" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[SpeedLimit]"
+                      dataType="r8"
+                      name="SpeedLimit" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverlessVehicle]"
+                      dataType="wstr"
+                      length="255"
+                      name="DriverlessVehicle" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[ParkedVehicle]"
+                      dataType="wstr"
+                      length="255"
+                      name="ParkedVehicle" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleYear]"
+                      dataType="r8"
+                      name="VehicleYear" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleMake]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleMake" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleModel]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleModel" />
+                    <externalMetadataColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[EquipmentProblems]"
+                      dataType="wstr"
+                      length="255"
+                      name="EquipmentProblems" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ReportNumber]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ReportNumber]"
+                      name="ReportNumber" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[LocalCaseNumber]"
+                      dataType="r8"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[LocalCaseNumber]"
+                      name="LocalCaseNumber" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[AgencyName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[AgencyName]"
+                      name="AgencyName" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ACRSReportType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ACRSReportType]"
+                      name="ACRSReportType" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrashDate]"
+                      dataType="date"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrashDate]"
+                      name="CrashDate" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrashTime]"
+                      dataType="date"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrashTime]"
+                      name="CrashTime" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[RouteType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[RouteType]"
+                      name="RouteType" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[RoadName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[RoadName]"
+                      name="RoadName" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrossStreetType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrossStreetType]"
+                      name="CrossStreetType" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrossStreetName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrossStreetName]"
+                      name="CrossStreetName" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CollisionType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CollisionType]"
+                      name="CollisionType" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[Weather]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[Weather]"
+                      name="Weather" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[SurfaceCondition]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[SurfaceCondition]"
+                      name="SurfaceCondition" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[Light]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[Light]"
+                      name="Light" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[TrafficControl]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[TrafficControl]"
+                      name="TrafficControl" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[PersonID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[PersonID]"
+                      name="PersonID" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverSubstanceAbuse]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverSubstanceAbuse]"
+                      name="DriverSubstanceAbuse" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[NonMotoristSubstanceAbuse]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[NonMotoristSubstanceAbuse]"
+                      name="NonMotoristSubstanceAbuse" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverAtFault]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverAtFault]"
+                      name="DriverAtFault" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[InjurySeverity]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[InjurySeverity]"
+                      name="InjurySeverity" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[Circumstance]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[Circumstance]"
+                      name="Circumstance" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverDistractedBy]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverDistractedBy]"
+                      name="DriverDistractedBy" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriversLicenseState]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriversLicenseState]"
+                      name="DriversLicenseState" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleID]"
+                      name="VehicleID" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleDamageExtent]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleDamageExtent]"
+                      name="VehicleDamageExtent" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleFirstImpactLocation]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleFirstImpactLocation]"
+                      name="VehicleFirstImpactLocation" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleSecondImpactLocation]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleSecondImpactLocation]"
+                      name="VehicleSecondImpactLocation" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleBodyType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleBodyType]"
+                      name="VehicleBodyType" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleMovement]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleMovement]"
+                      name="VehicleMovement" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleContinuingDir]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleContinuingDir]"
+                      name="VehicleContinuingDir" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleGoingDir]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleGoingDir]"
+                      name="VehicleGoingDir" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[SpeedLimit]"
+                      dataType="r8"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[SpeedLimit]"
+                      name="SpeedLimit" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverlessVehicle]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverlessVehicle]"
+                      name="DriverlessVehicle" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ParkedVehicle]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ParkedVehicle]"
+                      name="ParkedVehicle" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleYear]"
+                      dataType="r8"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleYear]"
+                      name="VehicleYear" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleMake]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleMake]"
+                      name="VehicleMake" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleModel]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleModel]"
+                      name="VehicleModel" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[EquipmentProblems]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[EquipmentProblems]"
+                      name="EquipmentProblems" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CarCrashDate_DataFlowTask\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\CarCrashDate_DataFlowTask\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Derived Column.Inputs[Derived Column Input].Columns[CrashDate]"
+                      cachedDataType="date"
+                      cachedName="CrashDate"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\CarCrashDate_DataFlowTask\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[FullDate]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[FullDate]"
+                      name="FullDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">CrashDate</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[DayOfWeek]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="9"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[DayOfWeek]"
+                      name="DayOfWeek"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">([DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 1 ? "Sunday" : [DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 2 ? "Monday" : [DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 3 ? "Tuesday" : [DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 4 ? "Wednesday" : [DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 5 ? "Thursday" : [DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 6 ? "Friday" : [DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 7 ? "Saturday" : "")</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DATEPART("dw",CrashDate) == 1 ? "Sunday" : DATEPART("dw",CrashDate) == 2 ? "Monday" : DATEPART("dw",CrashDate) == 3 ? "Tuesday" : DATEPART("dw",CrashDate) == 4 ? "Wednesday" : DATEPART("dw",CrashDate) == 5 ? "Thursday" : DATEPART("dw",CrashDate) == 6 ? "Friday" : DATEPART("dw",CrashDate) == 7 ? "Saturday" : "")</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[DayType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="7"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[DayType]"
+                      name="DayType"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">([DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 1 ? "Weekend" : [DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 2 ? "Weekday" : [DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 3 ? "Weekday" : [DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 4 ? "Weekday" : [DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 5 ? "Weekday" : [DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 6 ? "Weekday" : [DATEPART]("dw",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 7 ? "Weekend" : "")</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DATEPART("dw",CrashDate) == 1 ? "Weekend" : DATEPART("dw",CrashDate) == 2 ? "Weekday" : DATEPART("dw",CrashDate) == 3 ? "Weekday" : DATEPART("dw",CrashDate) == 4 ? "Weekday" : DATEPART("dw",CrashDate) == 5 ? "Weekday" : DATEPART("dw",CrashDate) == 6 ? "Weekday" : DATEPART("dw",CrashDate) == 7 ? "Weekend" : "")</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[DayOfMonth]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[DayOfMonth]"
+                      name="DayOfMonth"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DAY](#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DAY(CrashDate)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[CrashMonth]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[CrashMonth]"
+                      name="CrashMonth"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[MONTH](#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">MONTH(CrashDate)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[CrashQuarter]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[CrashQuarter]"
+                      name="CrashQuarter"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">([DATEPART]("qq",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 1 ? "Q1" : [DATEPART]("qq",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 2 ? "Q2" : [DATEPART]("qq",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 3 ? "Q3" : [DATEPART]("qq",#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]}) == 4 ? "Q4" : "")</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DATEPART("qq",CrashDate) == 1 ? "Q1" : DATEPART("qq",CrashDate) == 2 ? "Q2" : DATEPART("qq",CrashDate) == 3 ? "Q3" : DATEPART("qq",CrashDate) == 4 ? "Q4" : "")</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[CrashYear]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output].Columns[CrashYear]"
+                      name="CrashYear"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[YEAR](#{Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">YEAR(CrashDate)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\CarCrashDate_DataFlowTask\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CarCrashDate_DataFlowTask\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[ReportNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ReportNumber"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ReportNumber]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[LocalCaseNumber]"
+                      cachedDataType="r8"
+                      cachedName="LocalCaseNumber"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[LocalCaseNumber]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[AgencyName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="AgencyName"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[AgencyName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[ACRSReportType]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ACRSReportType"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ACRSReportType]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[CrashDate]"
+                      cachedDataType="date"
+                      cachedName="CrashDate"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrashDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[CrashTime]"
+                      cachedDataType="date"
+                      cachedName="CrashTime"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrashTime]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[RouteType]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="RouteType"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[RouteType]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[RoadName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="RoadName"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[RoadName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[CrossStreetType]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CrossStreetType"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrossStreetType]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[CrossStreetName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CrossStreetName"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrossStreetName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[CollisionType]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CollisionType"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CollisionType]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[Weather]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Weather"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Weather]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[SurfaceCondition]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="SurfaceCondition"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SurfaceCondition]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[Light]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Light"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Light]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[TrafficControl]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TrafficControl"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[TrafficControl]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[PersonID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PersonID"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[PersonID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[DriverSubstanceAbuse]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DriverSubstanceAbuse"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverSubstanceAbuse]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[NonMotoristSubstanceAbuse]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NonMotoristSubstanceAbuse"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[NonMotoristSubstanceAbuse]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[DriverAtFault]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DriverAtFault"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverAtFault]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[InjurySeverity]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="InjurySeverity"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[InjurySeverity]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[Circumstance]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Circumstance"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Circumstance]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[DriverDistractedBy]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DriverDistractedBy"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverDistractedBy]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[DriversLicenseState]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DriversLicenseState"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriversLicenseState]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[VehicleID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleID"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[VehicleDamageExtent]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleDamageExtent"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleDamageExtent]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[VehicleFirstImpactLocation]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleFirstImpactLocation"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleFirstImpactLocation]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[VehicleSecondImpactLocation]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleSecondImpactLocation"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleSecondImpactLocation]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[VehicleBodyType]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleBodyType"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleBodyType]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[VehicleMovement]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleMovement"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMovement]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[VehicleContinuingDir]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleContinuingDir"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleContinuingDir]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[VehicleGoingDir]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleGoingDir"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleGoingDir]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[SpeedLimit]"
+                      cachedDataType="r8"
+                      cachedName="SpeedLimit"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SpeedLimit]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[DriverlessVehicle]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DriverlessVehicle"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverlessVehicle]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[ParkedVehicle]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ParkedVehicle"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ParkedVehicle]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[VehicleYear]"
+                      cachedDataType="r8"
+                      cachedName="VehicleYear"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleYear]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[VehicleMake]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleMake"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMake]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[VehicleModel]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleModel"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleModel]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input].Columns[EquipmentProblems]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EquipmentProblems"
+                      lineageId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[EquipmentProblems]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[ReportNumber]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[ReportNumber]"
+                      name="ReportNumber">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ReportNumber]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[LocalCaseNumber]"
+                      dataType="r8"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[LocalCaseNumber]"
+                      name="LocalCaseNumber">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[LocalCaseNumber]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[AgencyName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[AgencyName]"
+                      name="AgencyName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[AgencyName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[ACRSReportType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[ACRSReportType]"
+                      name="ACRSReportType">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ACRSReportType]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]"
+                      dataType="date"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashDate]"
+                      name="CrashDate"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrashDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashTime]"
+                      dataType="date"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrashTime]"
+                      name="CrashTime">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrashTime]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[RouteType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[RouteType]"
+                      name="RouteType">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[RouteType]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[RoadName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[RoadName]"
+                      name="RoadName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[RoadName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrossStreetType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrossStreetType]"
+                      name="CrossStreetType">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrossStreetType]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrossStreetName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CrossStreetName]"
+                      name="CrossStreetName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrossStreetName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CollisionType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[CollisionType]"
+                      name="CollisionType">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CollisionType]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[Weather]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[Weather]"
+                      name="Weather">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Weather]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[SurfaceCondition]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[SurfaceCondition]"
+                      name="SurfaceCondition">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SurfaceCondition]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[Light]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[Light]"
+                      name="Light">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Light]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[TrafficControl]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[TrafficControl]"
+                      name="TrafficControl">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[TrafficControl]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[PersonID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[PersonID]"
+                      name="PersonID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[PersonID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[DriverSubstanceAbuse]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[DriverSubstanceAbuse]"
+                      name="DriverSubstanceAbuse">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverSubstanceAbuse]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[NonMotoristSubstanceAbuse]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[NonMotoristSubstanceAbuse]"
+                      name="NonMotoristSubstanceAbuse">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[NonMotoristSubstanceAbuse]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[DriverAtFault]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[DriverAtFault]"
+                      name="DriverAtFault">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverAtFault]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[InjurySeverity]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[InjurySeverity]"
+                      name="InjurySeverity">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[InjurySeverity]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[Circumstance]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[Circumstance]"
+                      name="Circumstance">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Circumstance]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[DriverDistractedBy]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[DriverDistractedBy]"
+                      name="DriverDistractedBy">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverDistractedBy]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[DriversLicenseState]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[DriversLicenseState]"
+                      name="DriversLicenseState">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriversLicenseState]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleID]"
+                      name="VehicleID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleDamageExtent]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleDamageExtent]"
+                      name="VehicleDamageExtent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleDamageExtent]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleFirstImpactLocation]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleFirstImpactLocation]"
+                      name="VehicleFirstImpactLocation">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleFirstImpactLocation]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleSecondImpactLocation]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleSecondImpactLocation]"
+                      name="VehicleSecondImpactLocation">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleSecondImpactLocation]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleBodyType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleBodyType]"
+                      name="VehicleBodyType">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleBodyType]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleMovement]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleMovement]"
+                      name="VehicleMovement">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMovement]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleContinuingDir]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleContinuingDir]"
+                      name="VehicleContinuingDir">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleContinuingDir]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleGoingDir]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleGoingDir]"
+                      name="VehicleGoingDir">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleGoingDir]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[SpeedLimit]"
+                      dataType="r8"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[SpeedLimit]"
+                      name="SpeedLimit">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SpeedLimit]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[DriverlessVehicle]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[DriverlessVehicle]"
+                      name="DriverlessVehicle">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverlessVehicle]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[ParkedVehicle]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[ParkedVehicle]"
+                      name="ParkedVehicle">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ParkedVehicle]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleYear]"
+                      dataType="r8"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleYear]"
+                      name="VehicleYear">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleYear]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleMake]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleMake]"
+                      name="VehicleMake">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMake]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleModel]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[VehicleModel]"
+                      name="VehicleModel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleModel]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[EquipmentProblems]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output].Columns[EquipmentProblems]"
+                      name="EquipmentProblems">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[EquipmentProblems]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CarCrashDate_DataFlowTask.Paths[Derived Column Output]"
+              endId="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim.Inputs[ADO NET Destination Input]"
+              name="Derived Column Output"
+              startId="Package\CarCrashDate_DataFlowTask\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\CarCrashDate_DataFlowTask.Paths[Excel Source Output]"
+              endId="Package\CarCrashDate_DataFlowTask\Sort.Inputs[Sort Input]"
+              name="Excel Source Output"
+              startId="Package\CarCrashDate_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\CarCrashDate_DataFlowTask.Paths[Sort Output]"
+              endId="Package\CarCrashDate_DataFlowTask\Derived Column.Inputs[Derived Column Input]"
+              name="Sort Output"
+              startId="Package\CarCrashDate_DataFlowTask\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="215,42"
+          Id="Package\CarCrashDate_DataFlowTask"
+          TopLeft="53.5,24.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\CarCrashDate_DataFlowTask">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="160,42"
+          Id="Package\CarCrashDate_DataFlowTask\CarCrashIncident"
+          TopLeft="164.5,15" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim"
+          TopLeft="160.5,306" />
+        <NodeLayout
+          Size="98,42"
+          Id="Package\CarCrashDate_DataFlowTask\Sort"
+          TopLeft="194,119" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\CarCrashDate_DataFlowTask\Derived Column"
+          TopLeft="169,208" />
+        <EdgeLayout
+          Id="Package\CarCrashDate_DataFlowTask.Paths[Sort Output]"
+          TopLeft="244.5,161">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47"
+              Start="0,0"
+              End="0,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CarCrashDate_DataFlowTask.Paths[Excel Source Output]"
+          TopLeft="243.75,57">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,62"
+              Start="0,0"
+              End="0,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CarCrashDate_DataFlowTask.Paths[Derived Column Output]"
+          TopLeft="245.25,250">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CarCrashDate_DataFlowTask\CarCrashIncident">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CarCrashDate_DataFlowTask\CarCrashDate_Dim">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,1201 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/5/2019 10:41:36 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SUBUNAIRFBED"
+  DTS:CreatorName="SUBUNAIRFBED\subunair"
+  DTS:DTSID="{679EA24D-71DE-47D9-9951-EF00C143DF06}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1900.80"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{D4EE67CF-AB0A-452B-830B-B4389F22E78D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{891306F5-CF1E-439B-A39A-8D1A318CF107}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\Mac\Home\Desktop\CarCrashIncident.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SUBUNAIRFBED.carCrashDW]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{A2C66B4B-2887-4802-8685-3F7CC23FA08E}"
+      DTS:ObjectName="SUBUNAIRFBED.carCrashDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SUBUNAIRFBED;Initial Catalog=carCrashDW;Integrated Security=True;Application Name=SSIS-Package1-{A2C66B4B-2887-4802-8685-3F7CC23FA08E}SUBUNAIRFBED.carCrashDW;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Vehicle_DataFlowTask"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{D5E22C9B-5622-4D05-B408-0D6F7D3CD9BD}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Vehicle_DataFlowTask"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Vehicle_DataFlowTask\CarCrashIncident"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="CarCrashIncident"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">CarCrashIncident$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output]"
+                  isSorted="true"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ReportNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[ReportNumber]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ReportNumber]"
+                      name="ReportNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[LocalCaseNumber]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[LocalCaseNumber]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[LocalCaseNumber]"
+                      name="LocalCaseNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[AgencyName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[AgencyName]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[AgencyName]"
+                      name="AgencyName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ACRSReportType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[ACRSReportType]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ACRSReportType]"
+                      name="ACRSReportType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrashDate]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrashDate]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrashDate]"
+                      name="CrashDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrashTime]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrashTime]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrashTime]"
+                      name="CrashTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[RouteType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[RouteType]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[RouteType]"
+                      name="RouteType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[RoadName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[RoadName]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[RoadName]"
+                      name="RoadName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrossStreetType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrossStreetType]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrossStreetType]"
+                      name="CrossStreetType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrossStreetName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrossStreetName]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CrossStreetName]"
+                      name="CrossStreetName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CollisionType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CollisionType]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[CollisionType]"
+                      name="CollisionType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Weather]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[Weather]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Weather]"
+                      name="Weather"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SurfaceCondition]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[SurfaceCondition]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SurfaceCondition]"
+                      name="SurfaceCondition"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Light]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[Light]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Light]"
+                      name="Light"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[TrafficControl]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[TrafficControl]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[TrafficControl]"
+                      name="TrafficControl"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[PersonID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[PersonID]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[PersonID]"
+                      name="PersonID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverSubstanceAbuse]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverSubstanceAbuse]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverSubstanceAbuse]"
+                      name="DriverSubstanceAbuse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[NonMotoristSubstanceAbuse]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[NonMotoristSubstanceAbuse]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[NonMotoristSubstanceAbuse]"
+                      name="NonMotoristSubstanceAbuse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverAtFault]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverAtFault]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverAtFault]"
+                      name="DriverAtFault"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[InjurySeverity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[InjurySeverity]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[InjurySeverity]"
+                      name="InjurySeverity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Circumstance]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[Circumstance]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[Circumstance]"
+                      name="Circumstance"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverDistractedBy]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverDistractedBy]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverDistractedBy]"
+                      name="DriverDistractedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriversLicenseState]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriversLicenseState]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriversLicenseState]"
+                      name="DriversLicenseState"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleID]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleID]"
+                      name="VehicleID"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleDamageExtent]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleDamageExtent]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleDamageExtent]"
+                      name="VehicleDamageExtent"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleFirstImpactLocation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleFirstImpactLocation]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleFirstImpactLocation]"
+                      name="VehicleFirstImpactLocation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleSecondImpactLocation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleSecondImpactLocation]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleSecondImpactLocation]"
+                      name="VehicleSecondImpactLocation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleBodyType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleBodyType]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleBodyType]"
+                      name="VehicleBodyType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMovement]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleMovement]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMovement]"
+                      name="VehicleMovement"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleContinuingDir]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleContinuingDir]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleContinuingDir]"
+                      name="VehicleContinuingDir"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleGoingDir]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleGoingDir]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleGoingDir]"
+                      name="VehicleGoingDir"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SpeedLimit]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[SpeedLimit]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SpeedLimit]"
+                      name="SpeedLimit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverlessVehicle]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverlessVehicle]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverlessVehicle]"
+                      name="DriverlessVehicle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ParkedVehicle]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[ParkedVehicle]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ParkedVehicle]"
+                      name="ParkedVehicle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleYear]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleYear]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleYear]"
+                      name="VehicleYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMake]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleMake]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMake]"
+                      name="VehicleMake"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleModel]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleModel]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleModel]"
+                      name="VehicleModel"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[EquipmentProblems]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[EquipmentProblems]"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[EquipmentProblems]"
+                      name="EquipmentProblems"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[ReportNumber]"
+                      dataType="wstr"
+                      length="255"
+                      name="ReportNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[LocalCaseNumber]"
+                      dataType="r8"
+                      name="LocalCaseNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[AgencyName]"
+                      dataType="wstr"
+                      length="255"
+                      name="AgencyName" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[ACRSReportType]"
+                      dataType="wstr"
+                      length="255"
+                      name="ACRSReportType" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrashDate]"
+                      dataType="date"
+                      name="CrashDate" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrashTime]"
+                      dataType="date"
+                      name="CrashTime" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[RouteType]"
+                      dataType="wstr"
+                      length="255"
+                      name="RouteType" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[RoadName]"
+                      dataType="wstr"
+                      length="255"
+                      name="RoadName" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrossStreetType]"
+                      dataType="wstr"
+                      length="255"
+                      name="CrossStreetType" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CrossStreetName]"
+                      dataType="wstr"
+                      length="255"
+                      name="CrossStreetName" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[CollisionType]"
+                      dataType="wstr"
+                      length="255"
+                      name="CollisionType" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[Weather]"
+                      dataType="wstr"
+                      length="255"
+                      name="Weather" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[SurfaceCondition]"
+                      dataType="wstr"
+                      length="255"
+                      name="SurfaceCondition" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[Light]"
+                      dataType="wstr"
+                      length="255"
+                      name="Light" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[TrafficControl]"
+                      dataType="wstr"
+                      length="255"
+                      name="TrafficControl" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[PersonID]"
+                      dataType="wstr"
+                      length="255"
+                      name="PersonID" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverSubstanceAbuse]"
+                      dataType="wstr"
+                      length="255"
+                      name="DriverSubstanceAbuse" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[NonMotoristSubstanceAbuse]"
+                      dataType="wstr"
+                      length="255"
+                      name="NonMotoristSubstanceAbuse" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverAtFault]"
+                      dataType="wstr"
+                      length="255"
+                      name="DriverAtFault" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[InjurySeverity]"
+                      dataType="wstr"
+                      length="255"
+                      name="InjurySeverity" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[Circumstance]"
+                      dataType="wstr"
+                      length="255"
+                      name="Circumstance" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverDistractedBy]"
+                      dataType="wstr"
+                      length="255"
+                      name="DriverDistractedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriversLicenseState]"
+                      dataType="wstr"
+                      length="255"
+                      name="DriversLicenseState" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleID]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleID" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleDamageExtent]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleDamageExtent" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleFirstImpactLocation]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleFirstImpactLocation" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleSecondImpactLocation]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleSecondImpactLocation" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleBodyType]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleBodyType" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleMovement]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleMovement" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleContinuingDir]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleContinuingDir" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleGoingDir]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleGoingDir" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[SpeedLimit]"
+                      dataType="r8"
+                      name="SpeedLimit" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[DriverlessVehicle]"
+                      dataType="wstr"
+                      length="255"
+                      name="DriverlessVehicle" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[ParkedVehicle]"
+                      dataType="wstr"
+                      length="255"
+                      name="ParkedVehicle" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleYear]"
+                      dataType="r8"
+                      name="VehicleYear" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleMake]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleMake" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[VehicleModel]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleModel" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].ExternalColumns[EquipmentProblems]"
+                      dataType="wstr"
+                      length="255"
+                      name="EquipmentProblems" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ReportNumber]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ReportNumber]"
+                      name="ReportNumber" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[LocalCaseNumber]"
+                      dataType="r8"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[LocalCaseNumber]"
+                      name="LocalCaseNumber" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[AgencyName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[AgencyName]"
+                      name="AgencyName" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ACRSReportType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ACRSReportType]"
+                      name="ACRSReportType" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrashDate]"
+                      dataType="date"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrashDate]"
+                      name="CrashDate" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrashTime]"
+                      dataType="date"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrashTime]"
+                      name="CrashTime" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[RouteType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[RouteType]"
+                      name="RouteType" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[RoadName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[RoadName]"
+                      name="RoadName" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrossStreetType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrossStreetType]"
+                      name="CrossStreetType" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrossStreetName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CrossStreetName]"
+                      name="CrossStreetName" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CollisionType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[CollisionType]"
+                      name="CollisionType" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[Weather]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[Weather]"
+                      name="Weather" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[SurfaceCondition]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[SurfaceCondition]"
+                      name="SurfaceCondition" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[Light]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[Light]"
+                      name="Light" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[TrafficControl]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[TrafficControl]"
+                      name="TrafficControl" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[PersonID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[PersonID]"
+                      name="PersonID" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverSubstanceAbuse]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverSubstanceAbuse]"
+                      name="DriverSubstanceAbuse" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[NonMotoristSubstanceAbuse]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[NonMotoristSubstanceAbuse]"
+                      name="NonMotoristSubstanceAbuse" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverAtFault]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverAtFault]"
+                      name="DriverAtFault" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[InjurySeverity]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[InjurySeverity]"
+                      name="InjurySeverity" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[Circumstance]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[Circumstance]"
+                      name="Circumstance" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverDistractedBy]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverDistractedBy]"
+                      name="DriverDistractedBy" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriversLicenseState]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriversLicenseState]"
+                      name="DriversLicenseState" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleID]"
+                      name="VehicleID" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleDamageExtent]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleDamageExtent]"
+                      name="VehicleDamageExtent" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleFirstImpactLocation]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleFirstImpactLocation]"
+                      name="VehicleFirstImpactLocation" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleSecondImpactLocation]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleSecondImpactLocation]"
+                      name="VehicleSecondImpactLocation" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleBodyType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleBodyType]"
+                      name="VehicleBodyType" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleMovement]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleMovement]"
+                      name="VehicleMovement" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleContinuingDir]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleContinuingDir]"
+                      name="VehicleContinuingDir" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleGoingDir]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleGoingDir]"
+                      name="VehicleGoingDir" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[SpeedLimit]"
+                      dataType="r8"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[SpeedLimit]"
+                      name="SpeedLimit" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverlessVehicle]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[DriverlessVehicle]"
+                      name="DriverlessVehicle" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ParkedVehicle]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ParkedVehicle]"
+                      name="ParkedVehicle" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleYear]"
+                      dataType="r8"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleYear]"
+                      name="VehicleYear" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleMake]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleMake]"
+                      name="VehicleMake" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleModel]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[VehicleModel]"
+                      name="VehicleModel" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[EquipmentProblems]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[EquipmentProblems]"
+                      name="EquipmentProblems" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Vehicle_DataFlowTask\Vehicle_Dim"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="Vehicle_Dim"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Vehicle_Dim"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SUBUNAIRFBED.carCrashDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[SUBUNAIRFBED.carCrashDW]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].Columns[VehicleID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[VehicleID]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleID]" />
+                    <inputColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].Columns[VehicleDamageExtent]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleDamageExtent"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[VehicleDamageExtent]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleDamageExtent]" />
+                    <inputColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].Columns[VehicleBodyType]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleBodyType"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[VehicleBodyType]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleBodyType]" />
+                    <inputColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].Columns[VehicleMovement]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VehicleMovement"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[VehicleMovement]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleMovement]" />
+                    <inputColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].Columns[SpeedLimit]"
+                      cachedDataType="r8"
+                      cachedName="SpeedLimit"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[SpeedLimit]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[SpeedLimit]" />
+                    <inputColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].Columns[DriverlessVehicle]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DriverlessVehicle"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[DriverlessVehicle]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[DriverlessVehicle]" />
+                    <inputColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].Columns[ParkedVehicle]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ParkedVehicle"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[ParkedVehicle]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[ParkedVehicle]" />
+                    <inputColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].Columns[VehicleYear]"
+                      cachedDataType="r8"
+                      cachedName="VehicleYear"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[VehicleYear]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[VehicleYear]" />
+                    <inputColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].Columns[EquipmentProblems]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EquipmentProblems"
+                      externalMetadataColumnId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[EquipmentProblem]"
+                      lineageId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output].Columns[EquipmentProblems]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[VehicleKey]"
+                      dataType="i4"
+                      name="VehicleKey" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[VehicleID]"
+                      dataType="wstr"
+                      length="255"
+                      name="VehicleID" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[VehicleBodyType]"
+                      dataType="wstr"
+                      length="100"
+                      name="VehicleBodyType" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[VehicleDamageExtent]"
+                      dataType="wstr"
+                      length="50"
+                      name="VehicleDamageExtent" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[VehicleMovement]"
+                      dataType="wstr"
+                      length="50"
+                      name="VehicleMovement" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[SpeedLimit]"
+                      dataType="i4"
+                      name="SpeedLimit" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[DriverlessVehicle]"
+                      dataType="wstr"
+                      length="50"
+                      name="DriverlessVehicle" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[ParkedVehicle]"
+                      dataType="wstr"
+                      length="50"
+                      name="ParkedVehicle" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[VehicleYear]"
+                      dataType="i4"
+                      name="VehicleYear" />
+                    <externalMetadataColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input].ExternalColumns[EquipmentProblem]"
+                      dataType="wstr"
+                      length="2147483647"
+                      name="EquipmentProblem" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Vehicle_DataFlowTask.Paths[Excel Source Output]"
+              endId="Package\Vehicle_DataFlowTask\Vehicle_Dim.Inputs[ADO NET Destination Input]"
+              name="Excel Source Output"
+              startId="Package\Vehicle_DataFlowTask\CarCrashIncident.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Vehicle_DataFlowTask"
+          TopLeft="56.5,35.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Vehicle_DataFlowTask">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Vehicle_DataFlowTask\CarCrashIncident"
+          TopLeft="185,34.1666666666667" />
+        <NodeLayout
+          Size="137,42"
+          Id="Package\Vehicle_DataFlowTask\Vehicle_Dim"
+          TopLeft="192.166666666667,154" />
+        <EdgeLayout
+          Id="Package\Vehicle_DataFlowTask.Paths[Excel Source Output]"
+          TopLeft="262.833333333333,76.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,77.8333333333333"
+              Start="0,0"
+              End="0,70.3333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,70.3333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Vehicle_DataFlowTask\Vehicle_Dim">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Vehicle_DataFlowTask\CarCrashIncident">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
